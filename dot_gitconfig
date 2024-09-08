@@ -1,0 +1,6 @@
+[user]
+	email = ecocher@fieldbox.ai
+	name = Emmanuel Cocher
+[core]
+	editor = vim
+	pager = 
