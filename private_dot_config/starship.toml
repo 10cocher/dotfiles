@@ -1,0 +1,81 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = false
+
+format = """
+$container\
+$python\
+$rust\
+$nodejs\
+$git_branch\
+$git_status\
+$git_state\
+$directory\
+$cmd_duration\
+$character
+"""
+
+palette = 'foo'
+
+[palettes.foo]
+almond = '#eaddca'
+brass = '#e1c16e'
+
+# Replace the '❯' symbol in the prompt with '➜'
+[character] # The name of the module we are configuring is 'character'
+success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
+error_symbol = '[✗](bold red)'
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
+[line_break]
+disabled = true
+
+[directory]
+truncation_length = 6
+truncate_to_repo = false
+before_repo_root_style = 'brass'
+style = 'almond'
+read_only = ''
+
+[python]
+disabled = false
+symbol = '🐍 '
+style = 'blue'
+format = '[\(${version}\) ]($style)'
+#format = '[\(${symbol}(${version})\)]($style) [\($virtualenv\) ](blue)'
+#format = 'via [${symbol}(${version})]($style) [(\($virtualenv\)) ](gray)'
+pyenv_version_name = true
+pyenv_prefix = "pyenv"
+detect_files = ['pyproject.toml', '.python-version', 'requirements.txt']
+
+[nodejs]
+disabled = false
+format = '[$symbol($version )]($style)'
+
+[git_branch]
+format = '[$symbol$branch(:$remote_branch)]($style) '
+truncation_length = 24
+truncation_symbol = '…'
+
+[git_status]
+format = '([$all_status$ahead_behind]($style) )'
+up_to_date = '✓'
+style = 'purple'
+
+[git_state]
+disabled = false
+style = 'bold yellow'
+
+[cmd_duration]
+min_time = 500
+show_milliseconds = true
+format = '⏳ [$duration](bold yellow)'
+
+[container]
+disabled = false
+format = '[$symbol \[$name\]]($style) '
