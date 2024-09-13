@@ -1,6 +1,13 @@
 [user]
 	email = ecocher@fieldbox.ai
 	name = Emmanuel Cocher
+	signingkey = ecocher@fiedlbox.ai
 [core]
 	editor = vim
 	pager = 
+[pull]
+	ff = only
+[commit]
+	gpgsign = true
+[tag]
+	gpgSign = true
