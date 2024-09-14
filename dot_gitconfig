@@ -1,7 +1,7 @@
 [user]
 	email = ecocher@fieldbox.ai
 	name = Emmanuel Cocher
-	signingkey = ecocher@fiedlbox.ai
+	signingkey = ~/.ssh/id_rsa.pub
 [core]
 	editor = vim
 	pager = 
@@ -11,3 +11,7 @@
 	gpgsign = true
 [tag]
 	gpgSign = true
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = ~/.config/git/allowed_signers
