@@ -13,7 +13,7 @@ italic.family = "Jet Brains Mono Nerd Font"
 italic.style = "Medium Italic"
 bold_italic.family = "Jet Brains Mono Nerd Font"
 bold_italic.style = "Bold Italic"
-size = 11
+size = 14
 
 [colors.primary]
 # Default colors

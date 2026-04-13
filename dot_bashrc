@@ -139,3 +139,6 @@ eval "$(starship init bash)"
 
 # direnv
 eval "$(direnv hook zsh)"
+
+# mermaid
+export PATH="$HOME/.nvm/versions/node/v16.17.0/bin/mmdc:$PATH"
