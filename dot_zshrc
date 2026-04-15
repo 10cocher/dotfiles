@@ -60,5 +60,8 @@ eval "$(direnv hook zsh)"
 # Starship Prompt
 eval "$(starship init zsh)"
 
+# Mise
+[ -x "$HOME/.local/bin/mise" ] && eval "$($HOME/.local/bin/mise activate zsh)"
+
 # Alacritty Completions
 [ -f /home/ecocher/alacritty/extra/completions/_alacritty ] && fpath+=( /home/ecocher/alacritty/extra/completions )
