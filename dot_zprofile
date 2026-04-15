@@ -1,3 +1,20 @@
-emulate sh
-. ~/.profile
-emulate zsh
+# User Local binaries (Chezmoi, Rust-analyzer, custom scripts)
+if [ -d "$HOME/bin" ]; then
+    export PATH="$HOME/bin:$PATH"
+fi
+
+if [ -d "$HOME/.local/bin" ]; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
+
+# Go (Golang)
+if [ -d "/usr/local/go/bin" ]; then
+    export PATH="$PATH:/usr/local/go/bin"
+fi
+
+# LaTeX (Tex Live 2024)
+if [ -d "/usr/local/texlive/2024/bin/x86_64-linux" ]; then
+    export PATH="/usr/local/texlive/2024/bin/x86_64-linux:$PATH"
+    export INFOPATH="$INFOPATH:/usr/local/texlive/2024/texmf-dist/doc/info"
+    export MANPATH="$MANPATH:/usr/local/texlive/2024/texmf-dist/doc/man"
+fi
