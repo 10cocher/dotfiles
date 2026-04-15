@@ -86,15 +86,3 @@ if [ ! -d "$HOME/.local/share/fonts/JetBrainsMono" ]; then
 else
     echo "JetBrains Mono Nerd Font is already installed."
 fi
-
-
-# ==========================================
-# System Shell Configuration
-# ==========================================
-if [ "$SHELL" != "$(which zsh)" ]; then
-    echo "Change shell configuration to use Zsh"
-    sudo chsh -s $(which zsh) $(whoami)
-    echo "Default shell changed to Zsh! (Requires a logout/login to take full effect)"
-else
-    echo "Zsh is already the default shell."
-fi
