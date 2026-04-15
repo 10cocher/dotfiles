@@ -43,6 +43,11 @@ if ! command -v alacritty &> /dev/null; then
     git clone https://github.com/alacritty/alacritty.git ~/.alacritty-source
     cd ~/.alacritty-source
 
+    # Check the latest stable release tag (e.g. v0.17.0)
+    LATEST_TAG=$(git describe --tags `git rev-list --tags --max-count=1`)
+    echo "Checking out stable release: $LATEST_TAG"
+    git checkout $LATEST_TAG
+
     # Compile the highly-optimized release build
     cargo build --release
 
