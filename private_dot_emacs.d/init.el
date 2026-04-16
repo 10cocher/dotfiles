@@ -438,14 +438,6 @@
   (setq js-indent-level 2)
   )
 
-;; Enable elpy
-;; (elpy-enable)
-(setq exec-path (append exec-path '("~/.pyenv/bin")))
-(pyenv-mode)
-;; (setq elpy-rpc-virtualenv-path 'current)
-
-;; (setq indent-tabs-mode nil)
-
 ;; ===================================
 ;; js / react
 ;; ===================================
