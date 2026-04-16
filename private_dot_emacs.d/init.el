@@ -128,11 +128,13 @@
   (savehist-mode))
 
 (use-package orderless
+  :ensure t
   :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
 (use-package marginalia
+  :ensure t
   :init (marginalia-mode))
 
 (use-package which-key
@@ -289,10 +291,11 @@
   :ensure t
   )
 
-(use-package pyenv-mode
-  :ensure t
-  :hook (python-mode . pyenv-mode)
-  )
+(when (executable-find "pyenv")
+  (use-package pyenv-mode
+    :ensure t
+    :hook (python-mode . pyenv-mode)
+  ))
 
 (use-package numpydoc
   :ensure t
