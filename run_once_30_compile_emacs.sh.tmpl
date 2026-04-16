@@ -7,7 +7,7 @@ if ! command -v emacs &> /dev/null; then
          libjpeg-dev libgif-dev libtiff5-dev libgnutls28-dev libncurses-dev \
          libjansson-dev libgccjit-13-dev libacl1-dev
 
-    echo "Cloning Emacs source code (blobless clone to ave bandwith)..."
+    echo "Cloning Emacs source code..."
     git clone --depth 1 --branch "{{ .emacs_version }}" https://github.com/emacs-mirror/emacs.git ~/.emacs-source
     cd ~/.emacs-source
 
