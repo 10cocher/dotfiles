@@ -64,6 +64,35 @@ else
     echo "Alacritty is already installed."
 fi
 
+# ==========================================
+# Compiling from Source: Alacritty
+# ==========================================
+
+if ! command -v emacs &> /dev/null; then
+    echo "Installing graphical and compilation dependencies for Emacs..."
+    sudo apt install -y autoconf make gcc texinfo libgtk-3-dev libxpm-dev \
+         libjpeg-dev libgif-dev libtiff5-dev libgnutls28-dev libncurses-dev libjansson-dev
+
+    echo "Cloning Emacs 30 source code..."
+    git clone --depth 1 --branch emacs-30 https://github.com/emacs-mirror/emacs.git
+    cd ~/.emacs-source
+
+    echo "Configuring the Emacs build environment..."
+    ./autogen.sh
+    # Configure with modern JSON support for fast language servers
+    ./configure --with-json --with-modules --with-x-toolkit=gtk3
+
+    echo "Compiling Emacs..."
+    make -j$(nproc)
+
+    echo "Installing Emacs to the system..."
+    sudo make install
+
+    echo "Emacs compilation complete!"
+else
+    echo "Emacs is already installed."
+fi
+
 
 # ==========================================
 # Typography (Nerd Fonts)
@@ -85,4 +114,14 @@ if [ ! -d "$HOME/.local/share/fonts/JetBrainsMono" ]; then
     echo "JetBrains Mono installed successfully!"
 else
     echo "JetBrains Mono Nerd Font is already installed."
+fi
+
+
+# ==========================================
+# System Background Services
+# ==========================================
+if command -v emacs &> /dev/null; then
+    echo "Handling Emacs over to the systemd engine..."
+    systemctl --user enable --now emacs
+    echo "Emacs background daemin is permanently online."
 fi
