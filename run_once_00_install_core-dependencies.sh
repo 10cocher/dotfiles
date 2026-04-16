@@ -2,7 +2,7 @@
 set -e
 
 sudo apt update
-sudo apt install -y build-essential wget unzip ripgrep fd-find
+sudo apt install -y build-essential wget unzip ripgrep fd-find zsh
 
 
 # ==========================================
