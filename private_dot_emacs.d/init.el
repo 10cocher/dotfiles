@@ -110,7 +110,7 @@
 (use-package vertico
   :ensure t
   :init
-  (vertico-mode)
+  (vertico-mode 1)
   ;; Different scroll margin
   ;; (setq vertico-scroll-margin 0)
 
@@ -138,7 +138,7 @@
 
 (use-package marginalia
   :ensure t
-  :init (marginalia-mode))
+  :init (marginalia-mode 1))
 
 (use-package which-key
   :ensure t
@@ -437,6 +437,14 @@
   :custom
   (setq js-indent-level 2)
   )
+
+;; Enable elpy
+;; (elpy-enable)
+(setq exec-path (append exec-path '("~/.pyenv/bin")))
+(pyenv-mode)
+;; (setq elpy-rpc-virtualenv-path 'current)
+
+;; (setq indent-tabs-mode nil)
 
 ;; ===================================
 ;; js / react
