@@ -59,8 +59,11 @@
 ;; Environment variables
 ;; ===================================
 
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (when (daemonp)
+    (exec-path-from-shell-initialize)))
 
 (use-package direnv
   :ensure t
@@ -291,11 +294,11 @@
   :ensure t
   )
 
-(when (executable-find "pyenv")
-  (use-package pyenv-mode
-    :ensure t
-    :hook (python-mode . pyenv-mode)
-  ))
+(use-package pyenv-mode
+  :ensure t
+  ;; The package will only load if this condition is true at runtime
+  :if (executable-find "pyenv")
+  :hook (python-mode . pyenv-mode))
 
 (use-package numpydoc
   :ensure t
