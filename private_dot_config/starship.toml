@@ -42,15 +42,15 @@ before_repo_root_style = 'brass'
 style = 'almond'
 read_only = ''
 
+[mise]
+disabled = true
+format = '[\[mise: $health\]]($style)'
+
 [python]
 disabled = false
-symbol = '🐍 '
+symbol = ' '
 style = 'blue'
-format = '[\(${version}\) ]($style)'
-#format = '[\(${symbol}(${version})\)]($style) [\($virtualenv\) ](blue)'
-#format = 'via [${symbol}(${version})]($style) [(\($virtualenv\)) ](gray)'
-pyenv_version_name = true
-pyenv_prefix = "pyenv"
+format = '[$symbol]($style)[(${version}) ]($style)[(\($virtualenv\)) ]($style)'
 detect_files = ['pyproject.toml', '.python-version', 'requirements.txt']
 
 [nodejs]

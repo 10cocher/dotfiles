@@ -2,10 +2,8 @@
 # PATH & ENVIRONMENT VARIABLES
 # ==========================================
 export NVM_DIR="$HOME/.nvm"
-export PYENV_ROOT="$HOME/.pyenv"
 
-# Add Pyenv and Mermaid to PATH
-export PATH="$PYENV_ROOT/bin:$PATH"
+# Add Mermaid to PATH
 export PATH="$HOME/.nvm/versions/node/v16.17.0/bin/mmdc:$PATH"
 
 # Bypass GNOME: force local bins into PATH
@@ -14,10 +12,6 @@ export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 # ==========================================
 # INITIALIZATIONS & COMPLETIONS
 # ==========================================
-# Initialize Pyenv
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
-
 # Initialize Rust
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
@@ -56,8 +50,6 @@ alias vpnstop='openvpn3 session-manage --disconnect --config ~/openvpn.ovpn'
 # ==========================================
 # TOOLS & PROMPT
 # ==========================================
-# direnv
-eval "$(direnv hook zsh)"
 
 # Starship Prompt
 eval "$(starship init zsh)"
