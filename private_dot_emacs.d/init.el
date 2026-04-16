@@ -370,64 +370,13 @@
   (setq lsp-enable-file-watchers nil))
 
 (use-package lsp-ui
+  :ensure t
   :commands lsp-ui-mode
   :custom
   (lsp-ui-doc-enable nil) ;; Disable doc popups to stop UI clutter/slowness
   (lsp-ui-sideline-enable nil)
   (lsp-ui-sideline-show-hover nil))
 
-
-;(use-package lsp-mode
-;  :ensure t
-;  :commands lsp
-;  :custom
-;  ;; (lsp-eldoc-render-all t)
-;  (lsp-idle-delay 0.6)
-;  ;; enable / disable the hints as you prefer:
-;  (lsp-inlay-hint-enable t);
-
-;  ;; python
-;  (lsp-pyls-plugins-flake8-enabled t)
-;  ;; rust-analyzer
-;  ;; These are optional configurations. See https://emacs-lsp.github.io/lsp-mode/page/lsp-rust-analyzer/#lsp-rust-analyzer-display-chaining-hints for a full list
-;  ;; what to use when checking on-save. "check" is default, I prefer "clippy"
-;  (lsp-rust-analyzer-cargo-watch-command "check")
-;  (lsp-rust-analyzer-display-lifetime-elision-hints-enable "skip_trivial")
-;  (lsp-rust-analyzer-display-chaining-hints t)
-;  (lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names nil)
-;  (lsp-rust-analyzer-display-closure-return-type-hints t)
-;  (lsp-rust-analyzer-display-parameter-hints nil)
-;  (lsp-rust-analyzer-display-reborrow-hints nil)
-;  :config
-;  (add-hook 'lsp-mode-hook 'lsp-ui-mode)
-;  ;; (lsp-register-custom-settings
-;  ;;  '(("pyls.plugins.pyls_mypy.enabled" t t)
-;  ;;    ("pyls.plugins.pyls_pypy.live_mode" nil t)
-;  ;;    ("pyls.plugins.pyls_black.enabled" t t)
-;  ;;    ("pyls.plugins.pyls_isort.enabled" t t)))
-;  :hook
-;  ;;(python-mode . lsp-mode)
-;  (rust-mode . lsp-mode)
-;  ;; (js-mode . lsp-mode)
-;  )
-
-;(use-package lsp-ui
-;  :ensure t
-;  :commands lsp-ui-mode
-;  :custom
-;  (lsp-ui-peek-always-show t)
-;  ;; sideline
-;  (lsp-ui-sideline-show-hover t)
-;  (lsp-ui-sideline-delay 0.5)
-;  (lsp-ui-sideline-ignore-duplicates nil)
-;  ;; doc
-;  (lsp-ui-doc nil)
-;  (lsp-ui-doc-delay 5)
-;  (lsp-ui-doc-header nil)
-;  (lsp-ui-doc-include-signature t)
-;  (lsp-ui-doc-use-childframe t)
-;  (lsp-ui-doc-show-with-cursor nil)
-;  )
 
 ;; ===================================
 ;; json
@@ -437,14 +386,6 @@
   :custom
   (setq js-indent-level 2)
   )
-
-;; Enable elpy
-;; (elpy-enable)
-(setq exec-path (append exec-path '("~/.pyenv/bin")))
-(pyenv-mode)
-;; (setq elpy-rpc-virtualenv-path 'current)
-
-;; (setq indent-tabs-mode nil)
 
 ;; ===================================
 ;; js / react
@@ -518,43 +459,11 @@
 (use-package auctex
   :ensure t)
 
+;; ===================
+;; Remove ido-mode
+;; ===================
+(ido-mode -1)
+(global-set-key (kbd "C-x C-f") 'find-file)
 
-
-;; User-Defined init.el ends here
-;;(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
-; '(ispell-dictionary nil)
-; '(package-selected-packages
-;   '(direnv treemacs-magit magit rainbow-delimiters treemacs-icons-dired treemacs rustic rustic-mode lsp-ui lsp-mode exec-path-from-shell consult pyenv-mode web-mode rjsx-mode docker-compose-mode dockerfile-mode markdown-mode))
-; '(sh-basic-offset 4))
-
-
-;; ===================================
-;; tree-sitter
-;; ===================================
-;(setq treesit-language-source-alist
-;  '((bash "https://github.com/tree-sitter/tree-sitter-bash")
-;    (cmake "https://github.com/uyha/tree-sitter-cmake")
-;    (css "https://github.com/tree-sitter/tree-sitter-css")
-;    (elisp "https://github.com/Wilfred/tree-sitter-elisp")
-;    (go "https://github.com/tree-sitter/tree-sitter-go")
-;    (html "https://github.com/tree-sitter/tree-sitter-html")
-;    (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
-;    (json "https://github.com/tree-sitter/tree-sitter-json")
-;    (make "https://github.com/alemuller/tree-sitter-make")
-;    (markdown "https://github.com/ikatyang/tree-sitter-markdown")
-;    (python "https://github.com/tree-sitter/tree-sitter-python")
-;    (toml "https://github.com/tree-sitter/tree-sitter-toml")
-;    (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
-;    (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
-;    (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
-
-
-
-
-;;;(provide 'init)
 
 ;;; init.el ends here
