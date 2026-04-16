@@ -74,7 +74,7 @@ if ! command -v emacs &> /dev/null; then
          libjpeg-dev libgif-dev libtiff5-dev libgnutls28-dev libncurses-dev libjansson-dev
 
     echo "Cloning Emacs 30 source code..."
-    git clone --depth 1 --branch emacs-30 https://github.com/emacs-mirror/emacs.git
+    git clone --depth 1 --branch emacs-30 https://github.com/emacs-mirror/emacs.git ~/.emacs-source
     cd ~/.emacs-source
 
     echo "Configuring the Emacs build environment..."
