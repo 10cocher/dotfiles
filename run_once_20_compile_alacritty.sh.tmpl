@@ -1,0 +1,27 @@
+#!/bin/bash
+set -e
+
+if ! command -v alacritty &> /dev/null; then
+    echo "Installing graphical dependencies for Alacritty"
+    sudo apt install -y cmake g++ pkg-config libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
+   
+    echo "Compiling Alacritty from source. This will put your CPU to work..."
+    # Clone into a hidden source directory
+    git clone --depth 1 --branch "{{ .alacritty_version }}" https://github.com/alacritty/alacritty.git ~/.alacritty-source
+    cd ~/.alacritty-source
+
+    # Compile the highly-optimized release build
+    cargo build --release
+
+    # Distribute the compiled binary to the system
+    sudo cp target/release/alacritty /usr/local/bin/
+
+    # Set up the desktop icon so it appears in your GNOME launcher
+    sudo cp extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
+    sudo desktop-file-install extra/linux/Alacritty.desktop
+    sudo update-desktop-database
+
+    echo "Alacritty compilation complete!"
+else
+    echo "Alacritty is already installed."
+fi

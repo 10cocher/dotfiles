@@ -1,0 +1,27 @@
+#!/bin/bash
+set -e
+
+if ! command -v emacs &> /dev/null; then
+    echo "Installing graphical and compilation dependencies for Emacs..."
+    sudo apt install -y autoconf make gcc texinfo libgtk-3-dev libxpm-dev \
+         libjpeg-dev libgif-dev libtiff5-dev libgnutls28-dev libncurses-dev \
+         libjansson-dev libgccjit-13-dev libacl1-dev
+
+    echo "Cloning Emacs source code (blobless clone to ave bandwith)..."
+    git clone --depth 1 --branch "{{ .emacs_version }}" https://github.com/emacs-mirror/emacs.git ~/.emacs-source
+    cd ~/.emacs-source
+
+    echo "Configuring the Emacs build environment..."
+    ./autogen.sh
+    ./configure --with-modules --with-x-toolkit=gtk3 --with-native-compilation
+
+    echo "Compiling Emacs..."
+    make -j$(nproc)
+
+    echo "Installing Emacs to the system..."
+    sudo make install
+
+    echo "Emacs compilation complete!"
+else
+    echo "Emacs is already installed."
+fi

@@ -1,0 +1,21 @@
+#!/bin/bash
+set -e
+
+if [ ! -d "$HOME/.local/share/fonts/JetBrainsMono" ]; then
+    echo "Downloading JetBrains Mono Nerd Font..."
+    mkdir -p "$HOME/.local/share/fonts/JetBrainsMono"
+
+    # Download the latest release directly from the source
+    wget -qO /tmp/JetBrainsMono.zip "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+
+    # Unpack it into the local fonts directory
+    unzip -q /tmp/JetBrainsMono.zip -d "$HOME/.local/share/fonts/JetBrainsMono"
+    rm /tmp/JetBrainsMono.zip
+
+    # Force the system to recognize the new fonts immediately
+    fc-cache -fv
+
+    echo "JetBrains Mono installed successfully!"
+else
+    echo "JetBrains Mono Nerd Font is already installed."
+fi
