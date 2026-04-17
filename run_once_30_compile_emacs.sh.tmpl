@@ -5,7 +5,7 @@ if ! command -v emacs &> /dev/null; then
     echo "Installing graphical and compilation dependencies for Emacs..."
     sudo apt install -y autoconf make gcc texinfo libgtk-3-dev libxpm-dev \
          libjpeg-dev libgif-dev libtiff5-dev libgnutls28-dev libncurses-dev \
-         libjansson-dev libgccjit-13-dev libacl1-dev
+         libjansson-dev libgccjit-13-dev libacl1-dev libtree-sitter-dev
 
     echo "Cloning Emacs source code..."
     git clone --depth 1 --branch "{{ .emacs_version }}" https://github.com/emacs-mirror/emacs.git ~/.emacs-source
@@ -13,7 +13,7 @@ if ! command -v emacs &> /dev/null; then
 
     echo "Configuring the Emacs build environment..."
     ./autogen.sh
-    ./configure --with-modules --with-x-toolkit=gtk3 --with-native-compilation
+    ./configure --with-modules --with-x-toolkit=gtk3 --with-native-compilation --with-tree-sitter
 
     echo "Compiling Emacs..."
     make -j$(nproc)
