@@ -9,13 +9,13 @@ padding.y = 8
 opacity = 1.0
 
 [font]
-normal.family = "Jet Brains Mono Nerd Font"
+normal.family = "JetBrainsMono Nerd Font"
 normal.style = "Medium"
-bold.family = "Jet Brains Mono Nerd Font"
+bold.family = "JetBrainsMono Nerd Font"
 bold.style = "Bold"
-italic.family = "Jet Brains Mono Nerd Font"
+italic.family = "JetBrainsMono Nerd Font"
 italic.style = "Medium Italic"
-bold_italic.family = "Jet Brains Mono Nerd Font"
+bold_italic.family = "JetBrainsMono Nerd Font"
 bold_italic.style = "Bold Italic"
 size = 14
 

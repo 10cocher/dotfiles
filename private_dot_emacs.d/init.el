@@ -65,10 +65,11 @@
   (when (daemonp)
     (exec-path-from-shell-initialize)))
 
-(use-package direnv
+(use-package mise
   :ensure t
   :config
-  (direnv-mode))
+  (global-mise-mode 1))
+
 
 ;; ===================================
 ;; Visuals & Themes
@@ -145,6 +146,19 @@
   :config
   (which-key-mode))
 
+
+;; ===================================
+;; Tree-Sitter
+;; ===================================
+(use-package treesit-auto
+  :ensure t
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode))
+
+
 ;; ===================================
 ;; Projectile
 ;; ===================================
@@ -156,7 +170,7 @@
               ("C-c p" . projectile-command-map))
   :config
   ;; (setq projectile-keymap-prefix (kbd "C-c p"))
-  (setq projectile-project-search-path '("~/jca/" "~/aoc/" ("~/github" . 1)))
+  (setq projectile-project-search-path '("~/code/" "~/jca/" "~/aoc/" ("~/github" . 1)))
   )
 
 ;; ===================================
@@ -277,7 +291,8 @@
 (setq major-mode-remap-alist
   '((python-mode . python-ts-mode)
     (yaml-mode . yaml-ts-mode)
-    (json-mode . json-ts-mode)))
+    (json-mode . json-ts-mode)
+    (toml-mode . toml-ts-mode)))
 
 
 (use-package python
@@ -293,12 +308,6 @@
 (use-package pip-requirements
   :ensure t
   )
-
-(use-package pyenv-mode
-  :ensure t
-  ;; The package will only load if this condition is true at runtime
-  :if (executable-find "pyenv")
-  :hook (python-mode . pyenv-mode))
 
 (use-package numpydoc
   :ensure t
