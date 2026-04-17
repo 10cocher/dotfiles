@@ -1,0 +1,22 @@
+#!/bin/bash
+set -e
+
+# ==========================================
+# Install Vivaldi browser
+# ==========================================
+
+if ! command -v vivaldi &> /dev/null; then
+    echo "Vivaldi not found. Installing..."
+
+    # Download and dearmor the Public Security Key
+    wget -qO- https://repo.vivaldi.com/archive/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/vivaldi-browser.gpg
+
+    echo "deb [signed-by=/usr/share/keyrings/vivaldi-browser.gpg arch=$(dpkg --print-architecture)] https://repo.vivaldi.com/archive/deb/ stable main" | sudo tee /etc/apt/sources.list.d/vivaldi-archive.list > /dev/null
+
+    sudo apt update
+    sudo apt install -y vivaldi-stable
+
+    echo "Vivaldi successfully installed!"
+else
+    echo "Vivalid is already installed. Skipping."
+fi
