@@ -1,11 +1,6 @@
 # ==========================================
 # PATH & ENVIRONMENT VARIABLES
 # ==========================================
-export NVM_DIR="$HOME/.nvm"
-
-# Add Mermaid to PATH
-export PATH="$HOME/.nvm/versions/node/v16.17.0/bin/mmdc:$PATH"
-
 # Bypass GNOME: force local bins into PATH
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
@@ -14,10 +9,6 @@ export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 # ==========================================
 # Initialize Rust
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
-
-# Initialize Node (NVM)
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # Initialize Zsh Completions
 autoload -U +X bashcompinit && bashcompinit
