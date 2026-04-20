@@ -32,6 +32,8 @@
 (add-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
 (setq-default display-fill-column-indicator-column 88)
 
+(setq-default show-trailing-whitespace t)
+
 (setq make-backup-files nil)        ;; remove backup files
 
 ;; ===================================
