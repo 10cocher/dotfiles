@@ -1,17 +1,30 @@
 [user]
-	email = ecocher@fieldbox.ai
-	name = Emmanuel Cocher
-	signingkey = ~/.ssh/id_rsa.pub
+email = ecocher@fieldbox.ai
+name = Emmanuel Cocher
+signingkey = 604FEE82A5DEC55B
+
 [core]
-	editor = vim
-	pager = 
+editor = vim
+pager =
+
 [pull]
-	ff = only
+ff = only
+
 [commit]
-	gpgsign = true
+gpgsign = true
+
 [tag]
-	gpgSign = true
-[gpg]
-	format = ssh
-[gpg "ssh"]
-	allowedSignersFile = ~/.config/git/allowed_signers
+gpgsign = true
+
+[init]
+defaultBranch = main
+
+
+# ===================
+# Personal Override
+# ===================
+[includeIf "gitdir:~/Code/Personal/"]
+path = ~/.gitconfig-personal
+
+[includeIf "gitdir:~/.local/share/chezmoi/"]
+path = ~/.gitconfig-personal
