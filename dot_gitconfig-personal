@@ -1,0 +1,8 @@
+# ====================
+# Personal override
+# ====================
+
+[user]
+name = Emmanuel Cocher
+email = emmanuel.cocher@proton.me
+signingkey = 33DD5D216D7BED61

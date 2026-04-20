@@ -1,0 +1,22 @@
+# Personal GitHub Account
+Host github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_personal_github
+  IdentitiesOnly yes
+
+
+# Professional Gitlab / Azure
+Host gitlab.fr.idmog.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_gitlab_fr_idmog_com
+  IdentitiesOnly yes
+
+Host gitlab.fieldbox.ai
+  User git
+  IdentityFile ~/.ssh/id_ed25519_gitlab_fieldbox_ai
+  IdentitiesOnly yes
+
+Host dev.azure.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_azure_devops
+  IdentitiesOnly yes
