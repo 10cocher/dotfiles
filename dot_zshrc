@@ -29,6 +29,7 @@ bindkey "$terminfo[kcud1]" history-beginning-search-forward-end
 # ==========================================
 # ALIASES
 # ==========================================
+alias ls='ls --color=auto'
 alias ll='ls -Al --color=auto'
 alias la='ls -A --color=auto'
 alias grep='grep --color=auto'
