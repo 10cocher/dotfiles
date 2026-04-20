@@ -34,6 +34,9 @@ alias ll='ls -Al --color=auto'
 alias la='ls -A --color=auto'
 alias grep='grep --color=auto'
 
+# Emacs alias
+alias startemacs="emacsclient -c -a ''"
+
 # VPN Aliases
 alias vpnstart='openvpn3 session-start --config ~/openvpn.ovpn'
 alias vpnstop='openvpn3 session-manage --disconnect --config ~/openvpn.ovpn'

@@ -25,6 +25,7 @@
 (tooltip-mode -1)                   ;; Disable tooltips
 (menu-bar-mode -1)                  ;; Disable the menu bar
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
+(add-to-list 'default-frame-alist '(font . "JetBrains Mono Nerd Font-12"))
 
 ;; line/column numbers
 (setq column-number-mode t)         ;; Always show column numbers
@@ -81,8 +82,6 @@
 (use-package material-theme
   :ensure t)
 (load-theme 'material t)
-
-(set-face-attribute 'default nil :font "JetBrains Mono Nerd Font" :height 120)
 
 (use-package rainbow-delimiters
   :ensure t
