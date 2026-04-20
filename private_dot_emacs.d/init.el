@@ -33,6 +33,7 @@
 (setq-default display-fill-column-indicator-column 88)
 
 (setq-default show-trailing-whitespace t)
+(setq-default indent-tabs-mode nil) ;; use whitespaces instead of tabs
 
 (setq make-backup-files nil)        ;; remove backup files
 
@@ -77,9 +78,6 @@
 ;; ===================================
 ;; Visuals & Themes
 ;; ===================================
-(use-package better-defaults
-  :ensure t)
-
 (use-package material-theme
   :ensure t)
 (load-theme 'material t)
@@ -240,7 +238,7 @@
     (treemacs-fringe-indicator-mode 'always)
     (when treemacs-python-executable
       (treemacs-git-commit-diff-mode t))
-  
+
     (pcase (cons (not (null (executable-find "git")))
 		 (not (null treemacs-python-executable)))
       (`(t . t)
@@ -270,6 +268,13 @@
   :ensure t)
 
 ;; ===================================
+;; yaml
+;; ===================================
+
+(use-package yaml-mode
+  :ensure t)
+
+;; ===================================
 ;; Development Setup
 ;; ===================================
 
@@ -281,17 +286,23 @@
   (yaml-mode . ws-butler-mode)
   )
 
+
+;; ===================================
+;; Docker
+;; ===================================
+
+(use-package dockerfile-mode
+  :ensure t
+  :mode "Dockerfile\\'") ;; Ensure files named "Dockerfile" open in this mode
+
+(use-package docker
+  :ensure t
+  :bind ("C-c d" . docker))
+
+
 ;; ===================================
 ;; python
 ;; ===================================
-
-;; This remaps standard python-mode to the faster python-ts-mode
-(setq major-mode-remap-alist
-  '((python-mode . python-ts-mode)
-    (yaml-mode . yaml-ts-mode)
-    (json-mode . json-ts-mode)
-    (toml-mode . toml-ts-mode)))
-
 
 (use-package python
   :ensure t
@@ -300,7 +311,7 @@
   (python-shell-interpreter-args "-i")
   (python-indent-offset 4)
   :config
-  (setq-default display-fill-column-indicator-column 89)
+  (setq-default display-fill-column-indicator-column 88)
   )
 
 (use-package pip-requirements
@@ -330,68 +341,12 @@
   )
 
 ;; ===================================
-;; Language Server Protocol
-;; ===================================
-
-(use-package lsp-mode
-  :ensure t
-  :init
-  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-  (setq lsp-keymap-prefix "C-c l")
-  :hook (
-         (python-ts-mode . lsp-deferred)
-         (python-mode . lsp-deferred)
-         (rust-mode . lsp-deferred)
-         (lsp-mode . lsp-enable-which-key-integration)
-         ;; This hook ensure that whenever LSP is active,
-         ;; it attempts to format the buffer before writing to disk
-         (lsp-mode . (lambda ()
-                       (add-hook 'before-save-hook #'lsp-format-buffer nil t))))
-
-  :commands (lsp lsp-deferred)
-  :custom
-  (lsp-restart 'ignore)
-  (lsp-keep-workspace-alive nil)
-  (lsp-idle-delay 0.5)
-  ;; hints
-  (lsp-inlay-hint-enable nil)
-  (lsp-lens-enable nil)
-  ;;
-  (lsp-disabled-clients '(pyright ruff ruff-lsp mypy))
-  ;;
-  ;; linters
-  (lsp-pylsp-plugins-pydocstyle-enabled nil)
-  (lsp-pylsp-plugins-pycodestyle-enabled nil)
-  (lsp-pylsp-plugins-black-enabled nil)
-  (lsp-pylsp-plugins-ruff-enabled t)
-  (lsp-pylsp-plugins-ruff-format-enabled t)
-  (lsp-pylsp-plugins-ruff-unsorted-imports-enabled t)
-  (lsp-pylsp-plugins-ruff-command ["ruff"])
-  ;;
-  ; formatters
-  (lsp-pylsp-plugins-flake8-enabled nil)
-  (lsp-pylsp-plugins-autopep8-enabled nil)
-  (lsp-pylsp-plugins-yapf-enabled nil)
-  :config
-  ;; Optimization for large files
-  (setq lsp-enable-file-watchers nil))
-
-(use-package lsp-ui
-  :ensure t
-  :commands lsp-ui-mode
-  :custom
-  (lsp-ui-doc-enable nil) ;; Disable doc popups to stop UI clutter/slowness
-  (lsp-ui-sideline-enable nil)
-  (lsp-ui-sideline-show-hover nil))
-
-
-;; ===================================
 ;; json
 ;; ===================================
 (use-package json-mode
   :ensure t
   :custom
-  (setq js-indent-level 2)
+  (js-indent-level 2)
   )
 
 ;; ===================================
@@ -459,18 +414,77 @@
               (reusable-frames . visible)
               (window-height   . 0.2)))
 
+;; ===================================
+;; Map to tree-sitter modes
+;; ===================================
+
+(setq major-mode-remap-alist
+  '((python-mode . python-ts-mode)
+    (yaml-mode . yaml-ts-mode)
+    (json-mode . json-ts-mode)
+    (toml-mode . toml-ts-mode)
+    (dockerfile-mode . dockerfile-ts-mode)))
+
+;; ===================================
+;; Language Server Protocol
+;; ===================================
+
+(use-package lsp-mode
+  :ensure t
+  :init
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-c l")
+  :hook (
+         (python-ts-mode . lsp-deferred)
+         (python-mode . lsp-deferred)
+         (rust-mode . lsp-deferred)
+         (lsp-mode . lsp-enable-which-key-integration)
+         ;; This hook ensure that whenever LSP is active,
+         ;; it attempts to format the buffer before writing to disk
+         (lsp-mode . (lambda ()
+                       (add-hook 'before-save-hook #'lsp-format-buffer nil t))))
+
+  :commands (lsp lsp-deferred)
+  :custom
+  (lsp-restart 'ignore)
+  (lsp-keep-workspace-alive nil)
+  (lsp-idle-delay 0.5)
+  ;; hints
+  (lsp-inlay-hint-enable nil)
+  (lsp-lens-enable nil)
+  ;;
+  (lsp-disabled-clients '(pyright ruff ruff-lsp mypy))
+  ;;
+  ;; linters
+  (lsp-pylsp-plugins-pydocstyle-enabled nil)
+  (lsp-pylsp-plugins-pycodestyle-enabled nil)
+  (lsp-pylsp-plugins-black-enabled nil)
+  (lsp-pylsp-plugins-ruff-enabled t)
+  (lsp-pylsp-plugins-ruff-format-enabled t)
+  (lsp-pylsp-plugins-ruff-unsorted-imports-enabled t)
+  (lsp-pylsp-plugins-ruff-command ["ruff"])
+  ;;
+  ; formatters
+  (lsp-pylsp-plugins-flake8-enabled nil)
+  (lsp-pylsp-plugins-autopep8-enabled nil)
+  (lsp-pylsp-plugins-yapf-enabled nil)
+  :config
+  ;; Optimization for large files
+  (setq lsp-enable-file-watchers nil))
+
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode
+  :custom
+  (lsp-ui-doc-enable nil) ;; Disable doc popups to stop UI clutter/slowness
+  (lsp-ui-sideline-enable nil)
+  (lsp-ui-sideline-show-hover nil))
+
 
 ;; =========
-;; emacs
+;; LaTeX
 ;; =========
 (use-package auctex
   :ensure t)
-
-;; ===================
-;; Remove ido-mode
-;; ===================
-(ido-mode -1)
-(global-set-key (kbd "C-x C-f") 'find-file)
-
 
 ;;; init.el ends here
