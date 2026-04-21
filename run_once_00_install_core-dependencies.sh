@@ -31,3 +31,11 @@ if ! command -v starship &> /dev/null; then
     echo "Installing Starship prompt..."
     curl -sS https://starship.rs/install.sh | sh -s -- -y
 fi
+
+# Install Atuin
+if ! command -v atuin &> /dev/null; then
+    echo "Installing Atuin history database..."
+    curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh -s -- --non-interactive
+else
+    echo "Atuin is already installed."
+fi

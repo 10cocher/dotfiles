@@ -10,21 +10,17 @@ export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 # Initialize Rust
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
-# Initialize Zsh Completions
+# Initialize Atuin
+[ -f "$HOME/.atuin/bin/env" ] && . "$HOME/.atuin/bin/env"
+
+# Alacritty Completions (must happen before compinit)
+[ -f /home/ecocher/alacritty/extra/completions/_alacritty ] && fpath+=( /home/ecocher/alacritty/extra/completions )
+
+# ==========================================
+# INITIALIZE COMPLETIONS
+# ==========================================
 autoload -U +X bashcompinit && bashcompinit
 autoload -U +X compinit && compinit
-
-
-# ==========================================
-# KEYBINDINGS (Smart History Search)
-# ==========================================
-# Make zsh autocomplete with up arrow
-autoload -Uz history-search-end
-zle -N history-beginning-search-backward-end history-search-end
-zle -N history-beginning-search-forward-end history-search-end
-bindkey "$terminfo[kcuu1]" history-beginning-search-backward-end
-bindkey "$terminfo[kcud1]" history-beginning-search-forward-end
-
 
 # ==========================================
 # ALIASES
@@ -52,5 +48,7 @@ eval "$(starship init zsh)"
 # Mise
 [ -x "$HOME/.local/bin/mise" ] && eval "$($HOME/.local/bin/mise activate zsh)"
 
-# Alacritty Completions
-[ -f /home/ecocher/alacritty/extra/completions/_alacritty ] && fpath+=( /home/ecocher/alacritty/extra/completions )
+# Atuin
+if command -v atuin &> /dev/null; then
+    eval "$(atuin init zsh)"
+fi

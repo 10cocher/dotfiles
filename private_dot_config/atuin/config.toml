@@ -1,0 +1,24 @@
+dialect = "uk"
+
+# Disable syncing
+auto_sync = false
+sync_adress = ""
+
+
+# Appearance
+invert = false
+inline_height = 20
+
+# Do not store bare, repetitive commands in the database
+# (But do store them if they have arguments)
+history_filter = [
+  "^ls$",
+  "^ll$",
+  "^cd$",
+  "^clear$",
+  "^startemacs$",
+  "^emacs$",
+]
+
+[dotfiles]
+enabled = false
