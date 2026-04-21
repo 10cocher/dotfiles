@@ -16,7 +16,7 @@ Host gitlab.fieldbox.ai
   IdentityFile ~/.ssh/id_ed25519_gitlab_fieldbox_ai
   IdentitiesOnly yes
 
-Host dev.azure.com
+Host ssh.dev.azure.com
   User git
   IdentityFile ~/.ssh/id_ed25519_azure_devops
   IdentitiesOnly yes
