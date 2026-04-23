@@ -1,3 +1,6 @@
+Host *
+  AddKeysToAgent yes
+
 # Personal GitHub Account
 Host github.com
   User git
