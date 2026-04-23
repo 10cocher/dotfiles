@@ -479,6 +479,16 @@
   (lsp-ui-sideline-enable nil)
   (lsp-ui-sideline-show-hover nil))
 
+;; ===================================
+;; vterm
+;; ===================================
+(use-package vterm
+  :ensure t)
+
+;; ===================================
+(use-package claude-code
+  :ensure t
+  :after vterm)
 
 ;; =========
 ;; LaTeX
