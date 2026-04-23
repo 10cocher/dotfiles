@@ -2,7 +2,7 @@
 set -e
 
 sudo apt update
-sudo apt install -y build-essential wget unzip ripgrep fd-find zsh wl-clipboard
+sudo apt install -y build-essential cmake libtool-bin wget unzip ripgrep fd-find zsh wl-clipboard
 
 
 # ==========================================
