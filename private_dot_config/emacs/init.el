@@ -373,6 +373,19 @@
   :mode "\\.d2\\'")
 
 ;; ===================================
+;; mermaid
+;; ===================================
+
+(use-package mermaid-mode
+  :ensure t
+  :mode ("\\.mmd\\'" . mermaid-mode)
+  :config
+  ;; Tell emacs what command to run to build the PNG image
+  (setq mermaid-mmdc-location "mmdc")
+  ;; Automatically open the image after compiling
+  (setq mermaid-output-format ".png"))
+
+;; ===================================
 ;; chezmoi
 ;; ===================================
 
