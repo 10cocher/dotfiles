@@ -81,8 +81,17 @@
 ;; Visuals & Themes
 ;; ===================================
 (use-package material-theme
-  :ensure t)
-(load-theme 'material t)
+  :ensure t
+  :config
+  ;; Check if Emacs is running as a headless daemon
+  (if (daemonp)
+      ;; If YES: Wait until the graphical frame is actually created before applying colors
+      (add-hook 'after-make-frame-functions
+                (lambda (frame)
+                  (with-selected-frame frame
+                    (load-theme 'material t))))
+    ;; if NO (running as a normal standalone app): Load it immediately
+    (load-theme 'material t)))
 
 (use-package rainbow-delimiters
   :ensure t
@@ -90,11 +99,20 @@
 
 (use-package dashboard
   :ensure t
+  :demand t
   :delight
   :config
-  (dashboard-setup-startup-hook)
   (setq dashboard-startup-banner 'logo)
-  )
+  (dashboard-setup-startup-hook)
+
+  ;; Tell emacsclient to explicitely target the dashboard buffer when opening
+  (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
+
+  ;; Wait for the physical graphical window to be constructed, then force
+  ;; the dashboard to calculate the real dimensions and redraw the layout.
+  (add-hook 'server-after-make-frame-hook
+            (lambda ()
+              (dashboard-refresh-buffer))))
 
 
 ;; =================================
