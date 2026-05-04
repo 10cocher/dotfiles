@@ -148,6 +148,7 @@
 ;; ===================================
 (use-package treesit-auto
   :ensure t
+  :demand t
   :custom
   (treesit-auto-install 'prompt)
   :config
