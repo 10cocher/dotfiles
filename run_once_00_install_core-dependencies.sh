@@ -1,8 +1,9 @@
 #!/bin/bash
 set -e
 
+sudo add-apt-repository -y ppa:libreoffice/ppa
 sudo apt update
-sudo apt install -y build-essential cmake libtool-bin wget unzip ripgrep fd-find zsh wl-clipboard
+sudo apt install -y build-essential cmake libtool-bin wget unzip ripgrep fd-find zsh wl-clipboard libreoffice libreoffice-gnome
 
 
 # ==========================================
