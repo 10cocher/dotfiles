@@ -20,6 +20,7 @@
 ;; ===================================
 
 (setq inhibit-startup-message t)    ;; Hide the startup message
+(setq ring-bell-function 'ignore)   ;; Silence the bell
 (scroll-bar-mode -1)                ;; Disable visible scrollbar
 (tool-bar-mode -1)                  ;; Disable the toolbar
 (tooltip-mode -1)                   ;; Disable tooltips
