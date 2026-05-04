@@ -383,7 +383,8 @@
   ;; Tell emacs what command to run to build the PNG image
   (setq mermaid-mmdc-location "mmdc")
   ;; Automatically open the image after compiling
-  (setq mermaid-output-format ".png"))
+  (setq mermaid-output-format ".png")
+  (setq mermaid-flags (concat "-p " (expand-file-name "~/.config/puppeteer-config.json"))))
 
 ;; ===================================
 ;; chezmoi
