@@ -39,6 +39,7 @@ chezmoi apply --exclude scripts
 
 - Create local ssh keys (following `~/.ssh/config`);
 - Import gpg key.;
+- Replace the placeholders for usernames (`@` should be replaced by `%40`) and PAT in ~/.git-credentials;
 - Add internal docker registry to `/etc/docker/daemon.json` to bypass rate limiting policy.
 
 To be able to use `claude-code`:

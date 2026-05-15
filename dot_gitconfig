@@ -26,6 +26,9 @@ prune = true
 lo = log --pretty=oneline -n 14
 br = branch -vv
 
+[credential]
+helper = store
+
 # ===================
 # Personal Override
 # ===================
