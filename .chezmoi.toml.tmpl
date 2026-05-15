@@ -1,7 +1,18 @@
+{{- $is_shared := false -}}
+{{- if stdinIsATTY -}}
+  {{- $is_shared = promptBool "Is this a shared/work VM (if y, I will use ~/.local/bin)" -}}
+{{- end  -}}
+
 [edit]
 command = "emacsclient"
 args = ["-c", "-a", ""]
 
 [data]
+is_shared = {{ $is_shared }}
+{{ if $is_shared -}}
+bin_dir = "{{ .chezmoi.homeDir }}/.local/bin"
+{{- else -}}
+bin_dir = "/usr/local/bin"
+{{- end }}
 emacs_version = "emacs-30.2"
 alacritty_version = "v0.17.0"

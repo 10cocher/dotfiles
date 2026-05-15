@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+{{ if (and (eq .chezmoi.os "linux") (not .is_shared)) -}}
+
 if [ ! -d "$HOME/.local/share/fonts/JetBrainsMono" ]; then
     echo "Downloading JetBrains Mono Nerd Font..."
     mkdir -p "$HOME/.local/share/fonts/JetBrainsMono"
@@ -19,3 +21,7 @@ if [ ! -d "$HOME/.local/share/fonts/JetBrainsMono" ]; then
 else
     echo "JetBrains Mono Nerd Font is already installed."
 fi
+
+{{- else -}}
+echo "Skipping font installation: Not a personal Linux desktop."
+{{- end -}}

@@ -7,7 +7,7 @@ set -e
 
 if ! command -v uv &> /dev/null; then
     echo "Installing uv..."
-    curl -LsSf https://astral.sh/uv/install.sh | sh
+    curl -LsSf https://astral.sh/uv/install.sh | env UV_INSTALL_DIR="{{ .bin_dir }}" UV_NO_MODIFY_PATH=1 sh
 else
     echo "uv is already installed."
 fi
@@ -18,7 +18,7 @@ fi
 
 if ! command -v d2 &> /dev/null; then
     echo "Installing d2..."
-    curl -fsSL https://d2lang.com/install.sh | sh -s --
+    curl -fsSL https://d2lang.com/install.sh | BINDIR={{ .bin_dir }} sh -s --
 else
     echo "D2 is already installed."
 fi
