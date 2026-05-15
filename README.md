@@ -26,6 +26,14 @@ This single command should be enough:
 sh -c "$(curl -fsLS https://get.chezmoi.io)" -- init --apply $GITHUB_USERNAME
 ```
 
+However, in the case of a machine that is shared with other user, to keep
+the `chezmoi` binary in the `${HOME}` folder instead of `/usr/bin/curl`:
+```console
+sh -c "$(curl -fsLS https://get.chezmoi.io)" -- -b ~/.local/bin
+chezmoi init https://github.com/$GITHUB_USERNAME/dotfiles.git
+chezmoi apply --exclude scripts
+```
+
 
 ## Post-installation manual operations
 

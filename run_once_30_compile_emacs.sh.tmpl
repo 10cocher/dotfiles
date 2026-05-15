@@ -1,6 +1,12 @@
 #!/bin/bash
 set -e
 
+{{ if .is_shared -}}
+if ! command -v emacs &> /dev/null; then
+    echo "Installing Emacs (terminal version) via apt..."
+    sudo apt install -y emacs-nox
+fi
+{{ else -}}
 if ! command -v emacs &> /dev/null; then
     echo "Installing graphical and compilation dependencies for Emacs..."
     sudo apt install -y autoconf make gcc texinfo libgtk-3-dev libxpm-dev \
@@ -25,3 +31,4 @@ if ! command -v emacs &> /dev/null; then
 else
     echo "Emacs is already installed."
 fi
+{{ end -}}

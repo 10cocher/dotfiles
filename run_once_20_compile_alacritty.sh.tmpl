@@ -1,10 +1,12 @@
 #!/bin/bash
 set -e
 
+{{ if (and (eq .chezmoi.os "linux") (not .is_shared)) -}}
+
 if ! command -v alacritty &> /dev/null; then
     echo "Installing graphical dependencies for Alacritty"
     sudo apt install -y cmake g++ pkg-config libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
-   
+
     echo "Compiling Alacritty from source. This will put your CPU to work..."
     # Clone into a hidden source directory
     git clone --depth 1 --branch "{{ .alacritty_version }}" https://github.com/alacritty/alacritty.git ~/.alacritty-source
@@ -25,3 +27,7 @@ if ! command -v alacritty &> /dev/null; then
 else
     echo "Alacritty is already installed."
 fi
+
+{{- else -}}
+echo "Skipping alacritty installation: Not a personal Linux desktop."
+{{- end -}}

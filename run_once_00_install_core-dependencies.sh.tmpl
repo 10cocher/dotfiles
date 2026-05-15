@@ -1,15 +1,26 @@
 #!/bin/bash
+# Code: {{ .chezmoi.sourceFile }}
 set -e
 
+{{ if not .is_shared -}}
+echo "Installing System-wide packages..."
 sudo add-apt-repository -y ppa:libreoffice/ppa
 sudo apt update
 sudo apt install -y build-essential cmake libtool-bin wget unzip ripgrep fd-find zsh wl-clipboard libreoffice libreoffice-gnome
+{{- else -}}
+echo "Shared VM detected. Skipping LibreOffice and system-wide PPAs."
+sudo apt install -y cmake zsh
+{{- end }}
 
+
+# Ensure the bin directory exists
+mkdir -p {{ .bin_dir }}
 
 # ==========================================
 # Toolchains (Rust & Mise)
 # ==========================================
 
+{{ if not .is_shared -}}
 # Install Rust (Idempotent)
 if ! command -v cargo &> /dev/null; then
     echo "Installing the Rust toolchain..."
@@ -20,6 +31,7 @@ if ! command -v cargo &> /dev/null; then
 else
     echo "Rust is already installed."
 fi
+{{- end }}
 
 # Install Mise
 if ! command -v mise &> /dev/null; then
@@ -30,7 +42,7 @@ fi
 # Install Starship
 if ! command -v starship &> /dev/null; then
     echo "Installing Starship prompt..."
-    curl -sS https://starship.rs/install.sh | sh -s -- -y
+    curl -sS https://starship.rs/install.sh | sh -s -- --bin-dir {{ .bin_dir }} -y
 fi
 
 # Install Atuin

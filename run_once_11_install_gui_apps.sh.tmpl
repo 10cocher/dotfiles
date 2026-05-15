@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
+{{ if (and (eq .chezmoi.os "linux") (not .is_shared)) -}}
 # ==========================================
 # Install Vivaldi browser
 # ==========================================
@@ -20,3 +21,6 @@ if ! command -v vivaldi &> /dev/null; then
 else
     echo "Vivalid is already installed. Skipping."
 fi
+{{- else -}}
+echo "Skipping vivaldi installation: Not a personal Linux desktop."
+{{- end -}}
