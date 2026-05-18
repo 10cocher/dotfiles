@@ -21,10 +21,16 @@
 
 (setq inhibit-startup-message t)    ;; Hide the startup message
 (setq ring-bell-function 'ignore)   ;; Silence the bell
-(scroll-bar-mode -1)                ;; Disable visible scrollbar
-(tool-bar-mode -1)                  ;; Disable the toolbar
-(tooltip-mode -1)                   ;; Disable tooltips
+
+;; Only disable if the feature actually exists (case of headless terminal)
+(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))  ;; Disable visible scrollbar
+(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))      ;; Disable the toolbar
+(when (fboundp 'tooltip-mode) (tooltip-mode -1))        ;; Disable tooltips
+
+;; The menu bar eixsts in terminal, too
 (menu-bar-mode -1)                  ;; Disable the menu bar
+
+;; Font and fullscreen parameters are ignored by terminal interfaces
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (add-to-list 'default-frame-alist '(font . "JetBrains Mono Nerd Font-12"))
 
