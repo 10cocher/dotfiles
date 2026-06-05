@@ -292,6 +292,13 @@
 (use-package magit
   :ensure t)
 
+(use-package magit-pre-commit
+  :ensure t
+  :after magit
+  :config
+  (with-eval-after-load 'magit
+    (define-key magit-status-mode-map (kbd "@") 'magit-pre-commit)))
+
 ;; ===================================
 ;; yaml
 ;; ===================================
