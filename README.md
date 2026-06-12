@@ -47,3 +47,27 @@ To be able to use `claude-code`:
 mise use --global node@latest
 mise use --global npm:@anthropic-ai/claude-code
 ```
+
+
+## gpg keys common operations
+- To check the status (expiration, in particular) of the gpg keys:
+```console
+gpg --list-secret-keys --keyid-format=long
+```
+The key id is the string right after `rsa4096/`.
+- To renew the expiration of a given gpg key:
+```console
+gpg --edit-key KEY_ID
+```
+Then type `expire`, choose the extension duration and then `save`.
+To also edit the secondary key: `key 1`, and then apply the same procedure.
+- To export a gpg key (to a password manager) and import it in another laptop:
+```console
+gpg --export-secret-keys -a KEY_ID > renewed_key.asc
+gpg --import renewed_key.asc
+```
+
+To understand the shorthands:
+- `S` stands for Signing.
+- `C` stands for Certifying.
+- `E` stands for Encryption.
