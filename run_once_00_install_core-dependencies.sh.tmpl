@@ -9,7 +9,7 @@ sudo apt update
 sudo apt install -y build-essential cmake libtool-bin wget unzip ripgrep fd-find zsh wl-clipboard libreoffice libreoffice-gnome
 {{- else -}}
 echo "Shared VM detected. Skipping LibreOffice and system-wide PPAs."
-sudo apt install -y cmake zsh
+sudo apt install -y cmake zsh pinentry-curses
 {{- end }}
 
 
