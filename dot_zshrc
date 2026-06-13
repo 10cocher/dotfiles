@@ -4,6 +4,8 @@
 # Bypass GNOME: force local bins into PATH
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
+export GPG_TTY=$(tty)
+
 # ==========================================
 # INITIALIZATIONS & COMPLETIONS
 # ==========================================

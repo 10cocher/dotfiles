@@ -1,0 +1,11 @@
+# Universal configurations
+default-cache-ttl 3600
+max-cache-ttl 86400
+
+# Jurisdictional Pinentry Selection
+{{ if .is_shared -}}
+# Headless machine: Force the text-based interface
+pinentry-program /usr/bin/pinentry-curses
+{{- else -}}
+# Graphical laptop: Let the OS choose the best graphical popup window (Gnome/KDE/Mac)
+{{- end }}
