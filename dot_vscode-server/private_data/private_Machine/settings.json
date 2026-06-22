@@ -1,0 +1,23 @@
+{
+  "editor.fontFamily": "'JetBrains Mono', Consolas, 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "editor.minimap.enabled": false,
+  "editor.stickyScroll.enabled": true,
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "terminal.integrated.fontFamily": "'JetBrains Mono'",
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.scrollback": 10000,
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/.venv/**": true,
+    "**/data/**": true,
+    "**/logs/**": true
+  },
+  "search.exclude": {
+    "**/data/**": true,
+    "**/logs/**": true,
+    "**/.venv/**": true
+  },
+}
