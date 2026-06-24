@@ -86,7 +86,7 @@
 ;; ===================================
 ;; Visuals & Themes
 ;; ===================================
-(use-package material-theme
+(use-package doom-themes
   :ensure t
   :config
   ;; Check if Emacs is running as a headless daemon
@@ -95,9 +95,9 @@
       (add-hook 'after-make-frame-functions
                 (lambda (frame)
                   (with-selected-frame frame
-                    (load-theme 'material t))))
+                    (load-theme 'doom-one t))))
     ;; if NO (running as a normal standalone app): Load it immediately
-    (load-theme 'material t)))
+    (load-theme 'doom-one t)))
 
 (use-package rainbow-delimiters
   :ensure t
