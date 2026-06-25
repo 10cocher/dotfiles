@@ -42,11 +42,6 @@ chezmoi apply --exclude scripts
 - Replace the placeholders for usernames (`@` should be replaced by `%40`) and PAT in ~/.git-credentials;
 - Add internal docker registry to `/etc/docker/daemon.json` to bypass rate limiting policy.
 
-To be able to use `claude-code`:
-```bash
-mise use --global node@latest
-mise use --global npm:@anthropic-ai/claude-code
-```
 
 
 ## gpg keys common operations

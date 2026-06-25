@@ -33,7 +33,7 @@ else
 fi
 {{- end }}
 
-# Install Claude Code (Idempotent)
+# Install Claude Code
 {{ if .install_claude -}}
 if ! command -v claude &> /dev/null; then
     echo "Installing Claude Code..."
