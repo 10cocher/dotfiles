@@ -533,9 +533,13 @@
   :ensure t)
 
 ;; ===================================
-(use-package claude-code
-  :ensure t
-  :after vterm)
+(use-package claude-code-ide
+  :vc (:url "https://github.com/manzaltu/claude-code-ide.el")
+  :config
+  (setq claude-code-ide-terminal-backend 'vterm)
+  (setq claude-code-ide-show-claude-window-in-ediff t)
+  (setq ediff-split-window-function #'split-window-vertically)
+  (claude-code-ide-emacs-tools-setup))
 
 ;; =========
 ;; LaTeX
