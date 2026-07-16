@@ -1,0 +1,11 @@
+{
+  "servers": {
+{{- range $i, $s := .mcpServers }}
+    "{{ $s.name }}": {
+      "type": "stdio",
+      "command": "{{ $s.command }}",
+      "args": {{ $s.args | toJson }}
+    }{{ if not (eq (add $i 1) (len $.mcpServers)) }},{{ end }}
+{{- end}}
+  }
+}
