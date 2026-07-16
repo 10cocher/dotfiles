@@ -1,0 +1,9 @@
+#!/bin/bash
+set -e
+
+if command -v claude >/dev/null 2>&1; then
+{{- range .mcpServers }}
+  claude mcp get {{ .name }} >/dev/null 2>&1 || \
+    claude mcp add {{ .name }} --scope user -- {{ .command }} {{ range .args }}{{ . }} {{ end }}
+{{- end }}
+fi
