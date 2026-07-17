@@ -62,3 +62,13 @@ if ! command -v atuin &> /dev/null; then
 else
     echo "Atuin is already installed."
 fi
+
+# Install az cli
+{{ if .install_az_cli -}}
+if ! command -v az &> dev/null; then
+    echo "Install az cli..."
+    curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+else
+    echo "az cli is already installed."
+fi
+{{- end }}
