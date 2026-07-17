@@ -1,8 +1,10 @@
 {{- $is_shared := false -}}
 {{- $install_claude := true -}}
+{{- $ado_org := "unknown" -}}
 {{- if stdinIsATTY -}}
   {{- $is_shared = promptBool "Is this a shared/work VM (if y, I will use ~/.local/bin)" -}}
   {{- $install_claude = promptBool "Should I install Claude Code" -}}
+  {{- $ado_org = promptString "Azure Devops organization name" -}}
 {{- end  -}}
 
 [edit]
@@ -12,6 +14,7 @@ args = ["-c", "-a", ""]
 [data]
 is_shared = {{ $is_shared }}
 install_claude = {{ $install_claude }}
+ado_org = {{ $ado_org | quote }}
 {{ if $is_shared -}}
 bin_dir = "{{ .chezmoi.homeDir }}/.local/bin"
 {{- else -}}
@@ -24,3 +27,8 @@ alacritty_version = "v0.17.0"
 name = "kedro-mcp"
 command = "uvx"
 args = ["kedro-mcp@latest"]
+
+[[data.mcpServers]]
+name = "azure-devops"
+command = "npx"
+args = ["-y", "@azure-devops/mcp", "{{ .ado_org }}", "--authentication", "azcli"]
