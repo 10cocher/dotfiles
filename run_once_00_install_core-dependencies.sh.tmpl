@@ -89,7 +89,7 @@ bw completion --shell zsh > ~/.zfunc/_bw
 
 # Install az cli
 {{ if .install_az_cli -}}
-if ! command -v az &> dev/null; then
+if ! command -v az &> /dev/null; then
     echo "Install az cli..."
     curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 else
