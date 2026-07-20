@@ -2,11 +2,15 @@
 {{- $install_claude := true -}}
 {{- $install_az_cli := false -}}
 {{- $ado_org := "unknown" -}}
+{{- $ado_email := "unknown" -}}
+{{- $personal_github_username := "unknown" -}}
 {{- if stdinIsATTY -}}
   {{- $is_shared = promptBool "Is this a shared/work VM (if y, I will use ~/.local/bin)" -}}
   {{- $install_claude = promptBool "Should I install Claude Code" -}}
   {{- $install_az_cli = promptBool "Should I install az cli" -}}
   {{- $ado_org = promptString "Azure Devops organization name" -}}
+  {{- $ado_email = promptStringOnce . "ado_email" "Azure Devops email" -}}
+  {{- $personal_github_username = promptStringOnce . "personal_github_username" "Personal Github username" -}}
 {{- end  -}}
 
 [edit]
@@ -21,6 +25,8 @@ is_shared = {{ $is_shared }}
 install_claude = {{ $install_claude }}
 install_az_cli = {{ $install_az_cli }}
 ado_org = {{ $ado_org | quote }}
+ado_email = {{ $ado_email | quote }}
+personal_github_username = {{ $personal_github_username | quote }}
 {{ if $is_shared -}}
 bin_dir = "{{ .chezmoi.homeDir }}/.local/bin"
 {{- else -}}
