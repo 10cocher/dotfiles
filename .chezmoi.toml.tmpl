@@ -5,10 +5,10 @@
 {{- $ado_email := "unknown" -}}
 {{- $personal_github_username := "unknown" -}}
 {{- if stdinIsATTY -}}
-  {{- $is_shared = promptBool "Is this a shared/work VM (if y, I will use ~/.local/bin)" -}}
-  {{- $install_claude = promptBool "Should I install Claude Code" -}}
-  {{- $install_az_cli = promptBool "Should I install az cli" -}}
-  {{- $ado_org = promptString "Azure Devops organization name" -}}
+  {{- $is_shared = promptBoolOnce . "is_shared" "Is this a shared/work VM (if y, I will use ~/.local/bin)" -}}
+  {{- $install_claude = promptBoolOnce . "install_claude" "Should I install Claude Code" -}}
+  {{- $install_az_cli = promptBoolOnce . "install_az_cli" "Should I install az cli" -}}
+  {{- $ado_org = promptStringOnce . "ado_org" "Azure Devops organization name" -}}
   {{- $ado_email = promptStringOnce . "ado_email" "Azure Devops email" -}}
   {{- $personal_github_username = promptStringOnce . "personal_github_username" "Personal Github username" -}}
 {{- end  -}}
