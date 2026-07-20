@@ -18,6 +18,9 @@ export GPG_TTY=$(tty)
 # Alacritty Completions (must happen before compinit)
 [ -f /home/ecocher/alacritty/extra/completions/_alacritty ] && fpath+=( /home/ecocher/alacritty/extra/completions )
 
+# Proton Pass CLI / Bitwarden CLI Completions (must happen before compinit)
+[ -d ~/.zfunc ] && fpath+=( ~/.zfunc )
+
 # ==========================================
 # INITIALIZE COMPLETIONS
 # ==========================================

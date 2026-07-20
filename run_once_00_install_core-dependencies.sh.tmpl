@@ -63,6 +63,30 @@ else
     echo "Atuin is already installed."
 fi
 
+# Install Proton Pass CLI
+if ! command -v pass-cli &> /dev/null; then
+    echo "Installing Proton Pass CLI..."
+    export PROTON_PASS_CLI_INSTALL_DIR={{ .bin_dir }}
+    curl -fsSL https://proton.me/download/pass-cli/install.sh | bash
+else
+    echo "Proton Pass CLI is already installed."
+fi
+mkdir -p ~/.zfunc
+pass-cli completions zsh > ~/.zfunc/_pass-cli
+
+# Install Bitwarden CLI
+if ! command -v bw &> /dev/null; then
+    echo "Installing Bitwarden CLI..."
+    curl -Lo /tmp/bw.zip "https://vault.bitwarden.com/download/?app=cli&platform=linux"
+    sudo unzip -o /tmp/bw.zip -d {{ .bin_dir }}
+    sudo chmod +x {{ .bin_dir }}/bw
+    rm /tmp/bw.zip
+else
+    echo "Bitwarden CLI is already installed."
+fi
+mkdir -p ~/.zfunc
+bw completion --shell zsh > ~/.zfunc/_bw
+
 # Install az cli
 {{ if .install_az_cli -}}
 if ! command -v az &> dev/null; then
