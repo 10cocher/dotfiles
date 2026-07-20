@@ -51,6 +51,9 @@ alias startemacs="emacsclient -c -a ''"
 alias vpnstart='openvpn3 session-start --config ~/openvpn.ovpn'
 alias vpnstop='openvpn3 session-manage --disconnect --config ~/openvpn.ovpn'
 
+# Bitwarden
+alias bwu='export BW_SESSION="$(bw unlock --raw)"'
+
 
 # ==========================================
 # TOOLS & PROMPT
