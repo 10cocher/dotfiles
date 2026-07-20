@@ -39,9 +39,54 @@ chezmoi apply --exclude scripts
 
 - Create local ssh keys (following `~/.ssh/config`);
 - Import gpg key.;
-- Replace the placeholders for usernames (`@` should be replaced by `%40`) and PAT in ~/.git-credentials;
 - Add internal docker registry to `/etc/docker/daemon.json` to bypass rate limiting policy.
 
+`~/.git-credentials` is generated automatically by `private_dot_git-credentials.tmpl`,
+which fetches the GitHub and Azure DevOps PATs from Proton Pass / Bitwarden at apply
+time — no manual editing needed, but both CLIs must be logged in first (see below).
+
+
+## Bitwarden and Proton Pass CLI
+
+For Proton Pass CLI
+```console
+pass-cli login --interactive
+pass-cli test
+pass-cli logout
+
+pass-cli session create-lock --idle-timeout=600
+pass-cli session lock
+pass-cli session unlock
+pass-cli session remove-lock
+```
+
+For Bitwarden, on a machine with a browser:
+```console
+bw login --sso   # will ask for the org's SSO identifier (company's name)
+bw lock
+bw unlock         # prompts for the master password interactively, never pass it as an argument
+bw logout
+```
+
+On a **headless/remote machine**, the SSO browser flow can't complete (no browser to
+open, no way to receive the redirect). Use a personal API key instead:
+
+1. Web vault → Settings → Security → Keys → "View API key" (re-enter your master
+   password) to get a `client_id` / `client_secret`.
+2. On the remote machine, read the secret without it landing in shell history:
+   ```console
+   read -rs BW_CLIENTSECRET
+   export BW_CLIENTSECRET
+   export BW_CLIENTID="user.xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+   bw login --apikey
+   ```
+3. `bw unlock` still prompts for the master password (never stored) to get a session —
+   this login is one-time; you don't need to redo step 2 after a reboot, only if the
+   API key is rotated.
+
+`chezmoi apply` already has `[bitwarden] unlock = "auto"` configured in
+`.chezmoi.toml.tmpl`, so it calls `bw unlock` and prompts for the master password
+automatically whenever `BW_SESSION` isn't set — no manual `bw unlock` needed day-to-day.
 
 
 ## gpg keys common operations
