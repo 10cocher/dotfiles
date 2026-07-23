@@ -4,6 +4,7 @@
 {{- $ado_org := "unknown" -}}
 {{- $ado_email := "unknown" -}}
 {{- $personal_github_username := "unknown" -}}
+{{- $fbx_plugins_url := "" -}}
 {{- if stdinIsATTY -}}
   {{- $is_shared = promptBoolOnce . "is_shared" "Is this a shared/work VM (if y, I will use ~/.local/bin)" -}}
   {{- $install_claude = promptBoolOnce . "install_claude" "Should I install Claude Code" -}}
@@ -11,6 +12,7 @@
   {{- $ado_org = promptStringOnce . "ado_org" "Azure Devops organization name" -}}
   {{- $ado_email = promptStringOnce . "ado_email" "Azure Devops email" -}}
   {{- $personal_github_username = promptStringOnce . "personal_github_username" "Personal Github username" -}}
+  {{- $fbx_plugins_url = promptStringOnce . "fbx_plugins_url" "Company GitLab Claude plugins marketplace SSH URL (blank to skip)" -}}
 {{- end  -}}
 
 [edit]
@@ -27,6 +29,7 @@ install_az_cli = {{ $install_az_cli }}
 ado_org = {{ $ado_org | quote }}
 ado_email = {{ $ado_email | quote }}
 personal_github_username = {{ $personal_github_username | quote }}
+fbx_plugins_url = {{ $fbx_plugins_url | quote }}
 {{ if $is_shared -}}
 bin_dir = "{{ .chezmoi.homeDir }}/.local/bin"
 {{- else -}}
