@@ -48,6 +48,10 @@ if ! command -v mise &> /dev/null; then
     echo "Installing Mise toolchain manager..."
     curl https://mise.run | sh
 fi
+export PATH="$HOME/.local/bin:$PATH"
+
+# Install everything declared in ~/.config/mise/config.toml (node, uv, ...)
+mise install
 
 # Install Starship
 if ! command -v starship &> /dev/null; then

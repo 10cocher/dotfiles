@@ -1,1 +1,4 @@
 README.md
+{{ if not .install_claude }}
+.claude/skills/ty-lsp
+{{ end }}
