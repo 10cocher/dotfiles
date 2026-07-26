@@ -1,0 +1,5 @@
+{
+  "name": "ty-lsp",
+  "description": "Language server integration for ty (Astral's Python type checker) via uvx.",
+  "version": "1.0.0"
+}

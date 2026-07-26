@@ -19,7 +19,8 @@
     }{{ end }}
   },
   "enabledPlugins": {
-    "example-skills@anthropic-agent-skills": true{{ if .fbx_plugins_url }},
-    "quality-review-plugin@fbx-plugins": true{{ end }}
+    {{ if .fbx_plugins_url }}"quality-review-plugin@fbx-plugins": true,
+    {{ end -}}
+    "example-skills@anthropic-agent-skills": true
   }
 }
