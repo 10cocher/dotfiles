@@ -22,5 +22,29 @@
     {{ if .fbx_plugins_url }}"quality-review-plugin@fbx-plugins": true,
     {{ end -}}
     "example-skills@anthropic-agent-skills": true
+  }{{ if not .is_shared }},
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "notify-send -u normal -i utilities-terminal 'Claude Code' 'Task Completed'"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "permission_prompt|elicitation_dialog|agent_needs_input",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "notify-send -u critical -i dialog-question 'Claude Code' 'Input Required'"
+          }
+        ]
+      }
+    ]
   }
+  {{ end }}
 }
