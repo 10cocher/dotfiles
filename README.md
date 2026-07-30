@@ -111,3 +111,16 @@ To understand the shorthands:
 - `S` stands for Signing.
 - `C` stands for Certifying.
 - `E` stands for Encryption.
+
+
+## Emacs: ghostel native module
+
+`claude-code-ide` uses `ghostel` as its terminal backend. `ghostel`'s native
+module (`ghostel-module.so`) is supposed to download automatically on first
+use, but loading the package at startup (via `use-package :ensure t`) doesn't
+trigger that — you'll see `Warning (ghostel): Native module not found: ...`
+on launch. Run this once manually to fetch it:
+```
+M-x ghostel-download-module
+```
+Then restart Emacs.
