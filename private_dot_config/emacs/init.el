@@ -527,16 +527,19 @@
   (lsp-ui-sideline-show-hover nil))
 
 ;; ===================================
-;; vterm
+;; vterm, ghostel
 ;; ===================================
 (use-package vterm
+  :ensure t)
+
+(use-package ghostel
   :ensure t)
 
 ;; ===================================
 (use-package claude-code-ide
   :vc (:url "https://github.com/manzaltu/claude-code-ide.el")
   :config
-  (setq claude-code-ide-terminal-backend 'vterm)
+  (setq claude-code-ide-terminal-backend 'ghostel)
   (setq claude-code-ide-show-claude-window-in-ediff t)
   (setq ediff-split-window-function #'split-window-vertically)
   (claude-code-ide-emacs-tools-setup))
