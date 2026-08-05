@@ -541,7 +541,6 @@
   :config
   (setq claude-code-ide-terminal-backend 'ghostel)
   (setq claude-code-ide-show-claude-window-in-ediff t)
-  (setq ediff-split-window-function #'split-window-vertically)
   (claude-code-ide-emacs-tools-setup))
 
 ;; =========
