@@ -533,7 +533,8 @@
   :ensure t)
 
 (use-package ghostel
-  :ensure t)
+  :ensure t
+  :hook (ghostel-mode . (lambda () (setq show-trailing-whitespace nil))))
 
 ;; ===================================
 (use-package claude-code-ide
