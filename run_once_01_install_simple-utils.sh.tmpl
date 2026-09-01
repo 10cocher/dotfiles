@@ -22,3 +22,14 @@ if ! command -v d2 &> /dev/null; then
 else
     echo "D2 is already installed."
 fi
+
+# ==========================================
+# Mermaid-chart CLI
+# ==========================================
+
+if ! command -v mmdc &> /dev/null; then
+    echo "Installing mermaid-chart CLI..."
+    npm install -g @mermaid-js/mermaid-cli
+else
+    echo "mermaid-chart is already installed."
+fi
