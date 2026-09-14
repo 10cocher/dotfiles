@@ -86,7 +86,17 @@ open, no way to receive the redirect). Use a personal API key instead:
 
 `chezmoi apply` already has `[bitwarden] unlock = "auto"` configured in
 `.chezmoi.toml.tmpl`, so it calls `bw unlock` and prompts for the master password
-automatically whenever `BW_SESSION` isn't set — no manual `bw unlock` needed day-to-day.
+automatically whenever `BW_SESSION` isn't set. That unlock only lives inside the
+chezmoi process though — it doesn't export `BW_SESSION` back into your shell, so
+the next `chezmoi` command in a new process prompts again. Run `bwu` once per shell
+session (see the `dot_zshrc` alias) to export `BW_SESSION` so subsequent `chezmoi`
+commands in that shell reuse it instead of prompting.
+
+`bw` also reads from a local encrypted vault cache, not live from the server, so if
+you rotate a secret (e.g. the Azure DevOps PAT) in the web vault, `bw`/chezmoi will
+keep returning the old cached value until the cache is refreshed. The `bwu` alias
+runs `bw sync` right after unlocking to cover this, but if a session is already
+unlocked, run `bw sync` manually after rotating anything in the vault.
 
 
 ## gpg keys common operations
