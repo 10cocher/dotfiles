@@ -1,5 +1,7 @@
 dialect = "uk"
 
+search_mode = "fulltext"
+
 # Disable syncing
 auto_sync = false
 sync_adress = ""
