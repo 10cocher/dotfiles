@@ -116,9 +116,16 @@
 
   ;; Wait for the physical graphical window to be constructed, then force
   ;; the dashboard to calculate the real dimensions and redraw the layout.
-  (add-hook 'server-after-make-frame-hook
-            (lambda ()
-              (dashboard-refresh-buffer))))
+  ;;
+  ;; NOTE: `server-after-make-frame-hook' fires on *every* server visit,
+  ;; not just when a genuinely new frame is created (e.g. Magit/with-editor
+  ;; opening COMMIT_EDITMSG through the daemon triggers it too). Refreshing
+  ;; the dashboard there would yank focus away from Magit after every commit,
+  ;; so only do it once, the first time a client frame is created.
+  (defun my/dashboard-refresh-on-first-frame ()
+    (dashboard-refresh-buffer)
+    (remove-hook 'server-after-make-frame-hook #'my/dashboard-refresh-on-first-frame))
+  (add-hook 'server-after-make-frame-hook #'my/dashboard-refresh-on-first-frame))
 
 
 ;; =================================
